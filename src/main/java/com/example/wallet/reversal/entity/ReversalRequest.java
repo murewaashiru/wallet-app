@@ -1,9 +1,17 @@
 package com.example.wallet.reversal.entity;
 
-public class ReversalRequestDTO {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+
+//@Entity
+public class ReversalRequest {
+//    @Column(name = "requestId", nullable = false)
     private String requestId;
 
-    public ReversalRequestDTO(String requestId) {
+    public ReversalRequest() {
+    }
+
+    public ReversalRequest(String requestId) {
         this.requestId = requestId;
     }
 

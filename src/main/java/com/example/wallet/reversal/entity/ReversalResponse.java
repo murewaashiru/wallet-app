@@ -1,12 +1,12 @@
 package com.example.wallet.reversal.entity;
 
-public class ReversalResponseDTO {
+public class ReversalResponse {
     private String code;
     private String message;
     private String corebankingResponseId;
     private String otherDetails;
 
-    public ReversalResponseDTO(String code, String message, String corebankingResponseId, String otherDetails) {
+    public ReversalResponse(String code, String message, String corebankingResponseId, String otherDetails) {
         this.code = code;
         this.message = message;
         this.corebankingResponseId = corebankingResponseId;
@@ -43,5 +43,15 @@ public class ReversalResponseDTO {
 
     public void setOtherDetails(String otherDetails) {
         this.otherDetails = otherDetails;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", corebankingResponseId='" + corebankingResponseId + '\'' +
+                ", otherDetails='" + otherDetails + '\'' +
+                '}';
     }
 }

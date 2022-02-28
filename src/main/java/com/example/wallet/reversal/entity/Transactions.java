@@ -10,16 +10,27 @@ public class Transactions {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "request_id", nullable = false)
+    private String requestId;
+
     @Column(name = "account_number", nullable = false)
     private String accountNumber;
 
-    @Column(name = "requestId", nullable = false)
-    private String requestId;
+    @Column(name = "amount", nullable = false)
+    private String amount;
 
-    public Transactions(int id, String accountNumber, String requestId) {
+    @Column(name = "transaction_type", nullable = false)
+    private String transactionType;
+
+    public Transactions() {
+    }
+
+    public Transactions(int id, String requestId, String accountNumber, String amount, String transactionType) {
         this.id = id;
-        this.accountNumber = accountNumber;
         this.requestId = requestId;
+        this.accountNumber = accountNumber;
+        this.amount = amount;
+        this.transactionType = transactionType;
     }
 
     public int getId() {
@@ -30,6 +41,14 @@ public class Transactions {
         this.id = id;
     }
 
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
     public String getAccountNumber() {
         return accountNumber;
     }
@@ -38,11 +57,19 @@ public class Transactions {
         this.accountNumber = accountNumber;
     }
 
-    public String getRequestId() {
-        return requestId;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setRequestId(String requestId) {
-        this.requestId = requestId;
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 }
