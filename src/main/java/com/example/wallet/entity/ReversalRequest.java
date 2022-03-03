@@ -1,11 +1,7 @@
-package com.example.wallet.reversal.entity;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
+package com.example.wallet.entity;
 
 //@Entity
 public class ReversalRequest {
-//    @Column(name = "requestId", nullable = false)
     private String requestId;
 
     public ReversalRequest() {

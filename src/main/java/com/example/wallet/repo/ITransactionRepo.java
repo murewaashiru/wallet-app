@@ -1,6 +1,6 @@
-package com.example.wallet.reversal.repo;
+package com.example.wallet.repo;
 
-import com.example.wallet.reversal.entity.Transactions;
+import com.example.wallet.entity.Transactions;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

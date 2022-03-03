@@ -1,6 +1,6 @@
-package com.example.wallet.reversal.repo;
+package com.example.wallet.repo;
 
-import com.example.wallet.reversal.entity.Balances;
+import com.example.wallet.entity.Balances;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,4 @@ import org.springframework.stereotype.Repository;
 public interface IBalanceRepo extends JpaRepository<Balances,String> {
     Balances findByAccountNumber(String accountNumber);
 
-//    void updateBalance(String accountNumber);
 }

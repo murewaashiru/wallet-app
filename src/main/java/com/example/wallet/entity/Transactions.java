@@ -1,10 +1,11 @@
-package com.example.wallet.reversal.entity;
+package com.example.wallet.entity;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name="WLT_T_DAY2DAY_RECORDS")
 public class Transactions {
+//    private static final DecimalFormat dfZero = new DecimalFormat("0.00");
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,7 +18,7 @@ public class Transactions {
     private String accountNumber;
 
     @Column(name = "amount", nullable = false)
-    private String amount;
+    private float amount;
 
     @Column(name = "transaction_type", nullable = false)
     private String transactionType;
@@ -25,7 +26,7 @@ public class Transactions {
     public Transactions() {
     }
 
-    public Transactions(int id, String requestId, String accountNumber, String amount, String transactionType) {
+    public Transactions(int id, String requestId, String accountNumber, float amount, String transactionType) {
         this.id = id;
         this.requestId = requestId;
         this.accountNumber = accountNumber;
@@ -57,11 +58,11 @@ public class Transactions {
         this.accountNumber = accountNumber;
     }
 
-    public String getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

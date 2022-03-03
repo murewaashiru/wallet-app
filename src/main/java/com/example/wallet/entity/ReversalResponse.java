@@ -1,4 +1,4 @@
-package com.example.wallet.reversal.entity;
+package com.example.wallet.entity;
 
 public class ReversalResponse {
     private String code;
