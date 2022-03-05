@@ -40,21 +40,19 @@ public class Reversal {
         }
 
         // To determine what account to debit or credit
-        Transactions toDebit = getTransaction.get(0), toCredit = getTransaction.get(1);
+        Transactions toDebit = getTransaction.get(1), toCredit = getTransaction.get(0);
         if (getTransaction.get(0).getTransactionType() == "DEBIT"){
             toCredit = getTransaction.get(0);
             toDebit = getTransaction.get(1);
-            System.out.println("CREDIT -: " + getTransaction.get(0).getAccountNumber());
         }
 
         ReversalResponse result = reversalService.reversal(toDebit, toCredit);
         return ResponseEntity.ok().body(result);
-
     }
 
-//    @ResponseStatus(HttpStatus.OK)
-//    @GetMapping("/transactions")
-//    public List<Transactions> getTransactions() {
-//        return iTransactionRepo.findAll();
-//    }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping("/transactions")
+    public List<Transactions> getTransactions() {
+        return iTransactionRepo.findAll();
+    }
 }

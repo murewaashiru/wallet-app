@@ -13,7 +13,7 @@ public class Balances {
     private String accountNumber;
 
     @Column(name = "balance", nullable = false)
-    private float balance;
+    private float balance; // bigdecimal or double
 
     public Balances() {
     }
