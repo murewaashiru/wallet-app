@@ -5,6 +5,8 @@ import com.example.wallet.entity.ReversalResponse;
 import com.example.wallet.entity.Transactions;
 import com.example.wallet.repo.ITransactionRepo;
 import com.example.wallet.service.ReversalService;
+import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/reversal")
+//@Api(value="/api/reversal",description="API to reverse transactions")
+@Tag(name="Reversal", description = "API to reverse transactions")
 public class Reversal {
     @Autowired
     private ReversalService reversalService;
