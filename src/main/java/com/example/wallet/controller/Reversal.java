@@ -17,8 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/reversal")
-//@Api(value="/api/reversal",description="API to reverse transactions")
-@Tag(name="Reversal", description = "API to reverse transactions")
+//@Tag(name="Reversal", description = "API to reverse transactions")
 public class Reversal {
     @Autowired
     private ReversalService reversalService;

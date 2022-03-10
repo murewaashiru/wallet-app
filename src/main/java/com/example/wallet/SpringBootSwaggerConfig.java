@@ -24,8 +24,9 @@ public class SpringBootSwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.example.wallet"))
                 .paths(PathSelectors.any())
+//                .paths(PathSelectors.ant("/api/*"))
                 .build();
     }
 
