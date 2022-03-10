@@ -52,10 +52,4 @@ public class Reversal {
         ReversalResponse result = reversalService.reversal(toDebit, toCredit);
         return ResponseEntity.ok().body(result);
     }
-
-    @ResponseStatus(HttpStatus.OK)
-    @GetMapping("/transactions")
-    public List<Transactions> getTransactions() {
-        return iTransactionRepo.findAll();
-    }
 }
