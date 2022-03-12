@@ -24,6 +24,12 @@ public class Balances {
         this.balance = balance;
     }
 
+    public Balances(String accountNumber, float balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+
     public int getId() {
         return id;
     }
