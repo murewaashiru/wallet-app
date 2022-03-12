@@ -1,7 +1,13 @@
 package com.example.wallet.entity;
 
-import javax.persistence.*;
+import lombok.Data;
+import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+
+@Component
+@Data
 @Entity
 @Table(name="WLT_T_DAY2DAY_RECORDS")
 public class Transactions {
@@ -23,12 +29,23 @@ public class Transactions {
     @Column(name = "transaction_type", nullable = false)
     private String transactionType;
 
+    @Column
+    private LocalDateTime transactionDate;
+
     public Transactions() {
     }
 
     public Transactions(int id, String requestId, String accountNumber, float amount, String transactionType) {
         this.id = id;
         this.requestId = requestId;
+        this.accountNumber = accountNumber;
+        this.amount = amount;
+        this.transactionType = transactionType;
+    }
+
+    public Transactions(String requestId, LocalDateTime date, String accountNumber, float amount, String transactionType) {
+        this.requestId = requestId;
+        this.transactionDate = date;
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.transactionType = transactionType;
