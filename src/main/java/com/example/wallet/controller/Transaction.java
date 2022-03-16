@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/transactions")
+@RequestMapping("api/v1")
 public class Transaction {
     @Autowired
     private ITransactionRepo iTransactionRepo;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping("")
+    @GetMapping("/transactions")
     public List<Transactions> getTransactions() {
         return iTransactionRepo.findAll();
     }

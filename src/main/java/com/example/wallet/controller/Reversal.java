@@ -7,6 +7,8 @@ import com.example.wallet.repo.ITransactionRepo;
 import com.example.wallet.service.ReversalService;
 import io.swagger.annotations.Api;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,11 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/reversal")
+@RequestMapping("/api/v1")
 //@Tag(name="Reversal", description = "API to reverse transactions")
 public class Reversal {
+    private static final Logger LOGGER = LoggerFactory.getLogger(Reversal.class);
+
     @Autowired
     private ReversalService reversalService;
     @Autowired
@@ -27,11 +31,13 @@ public class Reversal {
     ReversalResponse reversalResponse;
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("")
+    @PostMapping("/reversal")
     @Transactional
     public ResponseEntity<ReversalResponse> createReversals(@RequestBody ReversalRequest reversalRequest) {
         List<Transactions> getTransaction = iTransactionRepo.findByRequestId(reversalRequest.getRequestId());
+        LOGGER.info("Lookup transaction for ID {}", reversalRequest.getRequestId());
         List<Transactions> getReversedTransaction = iTransactionRepo.findByRequestId("REV-"+reversalRequest.getRequestId());
+        LOGGER.info("Lookup reversed transaction for ID {}", "REV-"+reversalRequest.getRequestId());
 
         if (getTransaction.size() == 0) {
             reversalResponse = new ReversalResponse("900", "Failed", null, "Transaction not found");
@@ -50,6 +56,7 @@ public class Reversal {
         }
 
         ReversalResponse result = reversalService.reversal(toDebit, toCredit);
+        LOGGER.info("Reversal response- {}", result);
         return ResponseEntity.ok().body(result);
     }
 }

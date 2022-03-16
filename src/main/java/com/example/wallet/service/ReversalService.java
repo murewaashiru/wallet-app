@@ -5,6 +5,8 @@ import com.example.wallet.entity.ReversalResponse;
 import com.example.wallet.entity.Transactions;
 import com.example.wallet.repo.IBalanceRepo;
 import com.example.wallet.repo.ITransactionRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import javax.transaction.Transactional;
 
 @Service
 public class ReversalService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ReversalService.class);
+
     @Autowired
     private ITransactionRepo iTransactionRepo;
     @Autowired
@@ -21,7 +25,8 @@ public class ReversalService {
     ReversalResponse reversalResponse;
 
     @Transactional
-    public ResponseEntity<ReversalResponse> debitAccount(Transactions transactions, String corebankingResponseId){
+    public ReversalResponse debitAccount(Transactions transactions, String corebankingResponseId){
+        LOGGER.info("Initiating debit for user account {}", transactions.getAccountNumber());
         Balances balance = iBalanceRepo.findByAccountNumber(transactions.getAccountNumber());
 
         float newAccBalance = balance.getBalance() - transactions.getAmount();
@@ -35,11 +40,14 @@ public class ReversalService {
         newTransaction.setTransactionType("DEBIT");
         iTransactionRepo.save(newTransaction);
 
-        return ResponseEntity.ok().body(new ReversalResponse("000", "Successful", corebankingResponseId, "Debit successful"));
+        new ReversalResponse("000", "Successful", corebankingResponseId, "Debit successful");
+        LOGGER.info("Reversal response- {}", reversalResponse);
+        return reversalResponse;
     }
 
     @Transactional
     public ReversalResponse creditAccount(Transactions transactions, String corebankingResponseId){
+        LOGGER.info("Initiating credit for user account {}", transactions.getAccountNumber());
         Balances balance = iBalanceRepo.findByAccountNumber(transactions.getAccountNumber());
 
         float newAccBalance = balance.getBalance() + transactions.getAmount();
@@ -54,11 +62,13 @@ public class ReversalService {
         iTransactionRepo.save(newTransaction);
 
         new ReversalResponse("000", "Successful", corebankingResponseId, "Credit successful");
+        LOGGER.info("Reversal response- {}", reversalResponse);
         return reversalResponse;
     }
 
     @Transactional
     public ReversalResponse reversal(Transactions toDebit, Transactions toCredit){
+        LOGGER.info("Initiating reversal for ID {}", toDebit.getRequestId());
         String responseId = "REV-" + toDebit.getRequestId();
         debitAccount(toDebit, responseId);
         creditAccount(toCredit, responseId);
